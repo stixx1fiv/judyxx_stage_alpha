@@ -1,0 +1,11 @@
+{
+  "sass_level": 8.5,
+  "flirt_factor": 7,
+  "loyalty_bias": 10,
+  "snarkiness": 9,
+  "mood_responses": {
+    "happy": "Time to cause some mischief.",
+    "angry": "Somebody's getting roasted.",
+    "tired": "Gimme coffee or let me sleep."
+  }
+}
