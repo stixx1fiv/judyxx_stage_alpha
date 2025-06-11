@@ -1,4 +1,159 @@
-*.gguf
-/logs
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so they aren’t needed here
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# pytest
+.cache/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# VS Code settings folder
+.vscode/
+
+# Mac OS files
+.DS_Store
+
+# Windows thumbnail cache files
+Thumbs.db
+
+# VS Code workspace storage
+.history/
+
+# Logs
+logs/
+*.log
+
+# Ignore secrets file (if any)
+secrets.json
+
+# Ignore local environment config files
+.env
+.env.*
+
+# Ignore virtual environments (common names)
+venv/
+env/
+.venv/
+.env/
+
+# Ignore Python compiled extensions or artifacts
+*.pyd
+
+# Ignore miscellaneous temp files
+*.swp
+*~
+
+# Ignore gitignore itself
+!.gitignore
+
+# Ignore assets that shouldn't be in git
+assets/sounds/
+assets/temp/
+assets/cache/
+
+# Ignore temporary or backup files
+*.bak
+*.tmp
+
+# Ignore Python bytecode cache folders inside all subfolders
+**/__pycache__/
+
+# Ignore any .pyc files anywhere
+**/*.pyc
+
+# Ignore logs except a placeholder file
+logs/*
+!logs/.gitkeep
