@@ -1,0 +1,49 @@
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
+from kivy.uix.label import Label
+from kivy.core.window import Window
+
+class JudyRoomScreen(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        layout = FloatLayout()
+
+        # Background image or color
+        bg = Image(source='assets/room_bg.png',
+                   allow_stretch=True,
+                   keep_ratio=False,
+                   size_hint=(1, 1),
+                   pos_hint={'x': 0, 'y': 0})
+        layout.add_widget(bg)
+
+        # Mood Selector Widget
+        mood_selector = MoodSelector(pos_hint={'x': 0.05, 'top': 0.95})
+        layout.add_widget(mood_selector)
+
+        # Task Tracker Widget
+        task_tracker = TaskTracker(pos_hint={'x': 0.7, 'top': 0.95})
+        layout.add_widget(task_tracker)
+
+        # Toggle Controls Widget
+        toggle_controls = ToggleControls(pos_hint={'x': 0.3, 'y': 0.05})
+        layout.add_widget(toggle_controls)
+
+        # Chat Box Widget
+        chat_box = ChatBox(pos_hint={'center_x': 0.5, 'y': 0.1})
+        chat_box.bind(on_text_validate=self.on_enter)
+        layout.add_widget(chat_box)
+
+        # Title Label
+        title = Label(text="Welcome to Judy's Room",
+                      font_size='24sp',
+                      color=(1, 1, 1, 1),
+                      pos_hint={'center_x': 0.5, 'top': 0.98})
+        layout.add_widget(title)
+
+        self.add_widget(layout)
+
+    def on_enter(self, instance):
+        message = instance.text.strip()
+        if message:
+            print(f"Judy hears: {message}")
+            instance.text = ''

@@ -1,0 +1,32 @@
+{
+  "scenes": {
+    "judy_room": {
+      "title": "Judy's Room",
+      "background_color": [135, 206, 235, 1],  
+      "elements": [
+        {
+          "type": "label",
+          "id": "welcome_text",
+          "text": "Welcome to Judy’s Room!",
+          "pos_hint": {"center_x": 0.5, "top": 0.9},
+          "font_size": "24sp",
+          "color": [1, 1, 1, 1]
+        },
+        {
+          "type": "image",
+          "id": "judy_static",
+          "source": "assets/judy_sitting.png",
+          "size_hint": [0.4, 0.6],
+          "pos_hint": {"center_x": 0.5, "center_y": 0.5}
+        },
+        {
+          "type": "button",
+          "id": "chat_button",
+          "text": "Chat with Judy",
+          "size_hint": [0.3, 0.1],
+          "pos_hint": {"center_x": 0.5, "y": 0.05}
+        }
+      ]
+    }
+  }
+}

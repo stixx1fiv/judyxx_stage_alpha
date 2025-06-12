@@ -1,5 +1,21 @@
 from core.startup_manager import StartupManager
 from core.judy_response_manager import JudyResponseManager
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager, Screen
+from gui.widgets.mood_selector import MoodSelector
+from gui.widgets.task_tracker import TaskTracker
+from gui.widgets.toggle_controls import ToggleControls
+from gui.widgets.chat_box import ChatBox
+
+class JudyRoomScreen(Screen):
+    pass
+
+class JudyApp(App):
+    def build(self):
+        sm = ScreenManager()
+        sm.add_widget(JudyRoomScreen(name='judy_room'))
+        return sm
+
 # Assuming you have a state_manager instance from somewhere
 response_manager = JudyResponseManager(state_manager, pet_name_file="config/pet_names.json")
 
@@ -9,11 +25,9 @@ def handle_user_input(user_input):
     print(response)  # Or send to your GUI text output
 
 
+
 def main():
     startup = StartupManager()
     startup.start()
-    # Your main event loop, GUI launch, or REPL goes here
-    print("Welcome back, Stixx . Judy is listening...")
-
-if __name__ == "__main__":
-    main()
+    print("Welcome back, Stixx. Judy is listening...")
+    JudyApp().run()
