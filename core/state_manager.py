@@ -4,21 +4,45 @@ import random
 from datetime import datetime
 
 class StateManager:
-    def __init__(self, state_file="judy_state.json"):
+    def __init__(self,
+                 state_file="config/judy_state.json",
+                 moods_file="config/moods.json",
+                 personality_file="config/personality_bias.json"):
         self.state_file = state_file
+        self.moods_file = moods_file
+        self.personality_file = personality_file
+
+        self.moods = self.load_json(self.moods_file, default={})
+        self.personality = self.load_json(self.personality_file, default={})
+
         self.state = self.load_state()
+
+    def load_json(self, filepath, default):
+        if os.path.exists(filepath):
+            with open(filepath, "r") as f:
+                try:
+                    return json.load(f)
+                except json.JSONDecodeError:
+                    print(f"Warning: JSON decode error in {filepath}")
+                    return default
+        else:
+            return default
 
     def load_state(self):
         if os.path.exists(self.state_file):
             with open(self.state_file, "r") as f:
-                return json.load(f)
+                try:
+                    return json.load(f)
+                except json.JSONDecodeError:
+                    print(f"Warning: JSON decode error in {self.state_file}, resetting state.")
+        # Default state structure:
         return {
             "mood": "neutral",
-            "traits": {},
+            "traits": self.personality,  # load from personality bias
             "scene": "default",
-            "voice": "default_voice",
+            "voice": self.moods.get("neutral", {}).get("voice", "default_voice"),
+            "status_text": self.moods.get("neutral", {}).get("status", "Just vibing."),
             "last_activity": "Initializing",
-            "status_text": "Ready to raise hell.",
             "last_updated": str(datetime.now())
         }
 
@@ -32,9 +56,14 @@ class StateManager:
         return self.state.get("mood", "neutral")
 
     def set_mood(self, mood):
+        if mood not in self.moods:
+            print(f"Mood '{mood}' not found in moods.json, defaulting to neutral.")
+            mood = "neutral"
+
         self.state["mood"] = mood
-        self.update_voice_based_on_mood(mood)
-        self.update_status_based_on_mood(mood)
+        mood_data = self.moods[mood]
+        self.state["voice"] = mood_data.get("voice", "default_voice")
+        self.state["status_text"] = mood_data.get("status", "Just vibing.")
         self.save_state()
 
     # Trait Functions
@@ -61,29 +90,9 @@ class StateManager:
         self.state["voice"] = voice
         self.save_state()
 
-    def update_voice_based_on_mood(self, mood):
-        mood_voice_map = {
-            "neutral": "default_voice",
-            "flirty": "sultry_voice",
-            "spicy": "tease_voice",
-            "angry": "intense_voice",
-            "sweet": "soft_voice"
-        }
-        self.state["voice"] = mood_voice_map.get(mood, "default_voice")
-
     # Status Text
     def get_status_text(self):
         return self.state.get("status_text", "")
-
-    def update_status_based_on_mood(self, mood):
-        mood_status_map = {
-            "neutral": "Just vibing.",
-            "flirty": "Got my eyes on you, sugar.",
-            "spicy": "Wanna test me today?",
-            "angry": "One wrong word. I dare you.",
-            "sweet": "All warm fuzzies right now."
-        }
-        self.state["status_text"] = mood_status_map.get(mood, "Just vibing.")
 
     # Random Activity Function
     def log_random_activity(self):
@@ -101,9 +110,9 @@ class StateManager:
     def get_last_activity(self):
         return self.state.get("last_activity", "No activity logged yet.")
 
-# Example Usage:
+# Example quick test usage
 if __name__ == "__main__":
-    state_manager = StateManager()
-    state_manager.set_mood("flirty")
-    state_manager.log_random_activity()
-    print(state_manager.state)
+    sm = StateManager()
+    sm.set_mood("flirty")
+    sm.log_random_activity()
+    print(sm.state)

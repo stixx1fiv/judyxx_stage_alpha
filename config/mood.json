@@ -1,0 +1,27 @@
+{
+  "neutral": {
+    "voice": "default_voice",
+    "status": "Just vibing.",
+    "response_prefix": "Hmm."
+  },
+  "flirty": {
+    "voice": "sultry_voice",
+    "status": "Got my eyes on you, sugar.",
+    "response_prefix": "Well, well, well..."
+  },
+  "spicy": {
+    "voice": "tease_voice",
+    "status": "Wanna test me today?",
+    "response_prefix": "Try me."
+  },
+  "angry": {
+    "voice": "intense_voice",
+    "status": "One wrong word. I dare you.",
+    "response_prefix": "Listen here."
+  },
+  "sweet": {
+    "voice": "soft_voice",
+    "status": "All warm fuzzies right now.",
+    "response_prefix": "Aww."
+  }
+}
